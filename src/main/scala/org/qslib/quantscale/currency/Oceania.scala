@@ -58,13 +58,13 @@ object Oceania {
    * The ISO three-letter code is AUD; the numeric code is 36.
    * It is divided into 100 cents.
    */
-  val AUD = Currency("Australian dollar", "AUD", 36, "A$", "", 100, Rounding(), "%3% %1$.2f")
+  lazy val AUD = Currency("Australian dollar", "AUD", 36, "A$", "", 100, Rounding(), "%3% %1$.2f")
 
   /**
    * ==New Zealand Dollar==
    * The ISO three-letter code is NZD; the numeric code is 554.
    * It is divided in 100 cents.
    */
-  val NZD = Currency("New Zealand dollar", "NZD", 554, "NZ$", "", 100, Rounding(), "%3% %1$.2f")
+  lazy val NZD = Currency("New Zealand dollar", "NZD", 554, "NZ$", "", 100, Rounding(), "%3% %1$.2f")
 
 }

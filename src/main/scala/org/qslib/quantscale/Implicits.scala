@@ -26,6 +26,7 @@ import org.qslib.quantscale.currency.ExchangeRateManager
 import org.saddle.Vec
 import scala.reflect.ClassTag
 import org.qslib.quantscale.math.TridiagonalOperator
+import org.qslib.quantscale.currency._
 
 /**
  * Implicit values and classes for syntactic sugar.
@@ -40,7 +41,7 @@ object Implicits {
 
   implicit val epsilon = 1.0e-5
   implicit val defaultPrecision = math.Precision(epsilon)
-  implicit val defaultMoneyConversionConfig = MoneyConversionConfig(ExchangeRateManager, AutomatedConversion, EUR)
+  implicit val defaultMoneyConversionConfig = MoneyConversionConfig(ExchangeRateManager, AutomatedConversion, Europe.EUR)
 
   /** Time interval used in finite differences. */
   implicit val dt = 0.0001

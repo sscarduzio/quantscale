@@ -41,20 +41,44 @@ package org.qslib.quantscale
 import org.qslib.quantscale.time.DayCounter
 import org.qslib.quantscale.time._
 import com.github.nscala_time.time.Imports._
+import org.qslib.quantscale.time.Frequency.{Once, NoFrequency}
 
-sealed trait Compounding
+sealed trait Compounding {
+  def factor(rate: Rate, frequency: Frequency, time: Time): Real
 
+  def rate(compound: Real, frequency: Frequency, time: Time): Real
+}
 /** 1+rt */
-case object Simple extends Compounding
+case object Simple extends Compounding {
+  override def factor(rate: Rate, frequency: Frequency, time: Time): Real = 1.0 + rate * time
+
+  override def rate(compound: Real, frequency: Frequency, time: Time): Real = (compound - 1.0) / time
+}
 
 /** (1+r)^t */
-case object Compounded extends Compounding
+case object Compounded extends Compounding {
+  override def factor(rate: Rate, frequency: Frequency, time: Time): Real = Math.pow(1.0 + rate / frequency, frequency * time)
+
+  override def rate(compound: Real, frequency: Frequency, time: Time): Real = (Math.pow(compound, 1.0 / (frequency * time)) - 1.0) * frequency
+}
 
 /** e^(rt) */
-case object Continuous extends Compounding
+case object Continuous extends Compounding {
+  override def factor(rate: Rate, frequency: Frequency, time: Time): Real = Math.exp(rate * time)
+
+  override def rate(compound: Real, frequency: Frequency, time: Time): Real = Math.log(compound) / time
+}
 
 /** Simple up to the first period then Compounded */
-case object SimpleThenCompounded extends Compounding
+case object SimpleThenCompounded extends Compounding {
+  override def factor(rate: Rate, frequency: Frequency, time: Time): Real =
+    if (time <= 1.0 / frequency) 1.0 + rate * time
+    else Math.pow(1.0 + rate / frequency, frequency * time)
+
+  override def rate(compound: Real, frequency: Frequency, time: Time): Real =
+    if (time <= 1.0 / frequency) (compound - 1.0) / time
+    else (Math.pow(compound, 1.0 / (frequency * time)) - 1.0) * frequency
+}
 
 /**
  * ==Concrete Interest Rate Class==
@@ -95,16 +119,9 @@ case class InterestRate(rate: Rate, dayCounter: DayCounter, compounding: Compoun
    * @return the compound (a.k.a capitalization) factor implied by the rate compounded at time t.
    * @note Time must be measured using InterestRate's own day counter.
    */
-  def compoundFactor(t: Time): Real = {
-    require(t >= 0.0, "Negative time not allowed")
-    compounding match {
-      case Simple => 1.0 + rate * t
-      case Compounded => Math.pow(1.0 + rate / frequency(), frequency() * t)
-      case Continuous => Math.exp(rate * t)
-      case SimpleThenCompounded =>
-        if (t <= 1.0 / frequency()) 1.0 + rate * t
-        else Math.pow(1.0 + rate / frequency(), frequency() * t)
-    }
+  def compoundFactor(time: Time): Real = {
+    require(time >= 0.0, "Negative time not allowed")
+    compounding.factor(rate, frequency, time)
   }
 
   /**
@@ -165,22 +182,15 @@ object InterestRate {
 
     require(compound > 0.0, s"Positive compound ($compound) factor required.")
 
-    val r = if (compound == 1.0) {
+    val rate = if (compound == 1.0) {
       require(t >= 0.0, s"non negative time ($t) required")
       0.0
     } else {
       require(t > 0.0, s"positive time ($t) required")
-      comp match {
-        case Simple => (compound - 1.0) / t
-        case Compounded => (Math.pow(compound, 1.0 / (freq() * t)) - 1.0) * freq()
-        case Continuous => Math.log(compound) / t
-        case SimpleThenCompounded =>
-          if (t <= 1.0 / freq()) (compound - 1.0) / t
-          else (Math.pow(compound, 1.0 / (freq() * t)) - 1.0) * freq()
-      }
+      comp.rate(compound, freq, t)
     }
 
-    InterestRate(r, resultDC, comp, freq)
+    InterestRate(rate, resultDC, comp, freq)
   }
 
   /**

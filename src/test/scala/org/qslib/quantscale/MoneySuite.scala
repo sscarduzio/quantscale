@@ -43,6 +43,8 @@ import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.qslib.quantscale.currency.ExchangeRateManager
 import org.qslib.quantscale.math.Rounding
+import org.qslib.quantscale.currency.Europe.{EUR, GBP}
+import org.qslib.quantscale.currency.America.USD
 import Implicits.{ DecimalToMoney, AlmostEqualDecimal, defaultPrecision }
 
 @RunWith(classOf[JUnitRunner])

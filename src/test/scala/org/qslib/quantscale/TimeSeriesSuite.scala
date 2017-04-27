@@ -42,6 +42,7 @@ package org.qslib.quantscale
 import org.joda.time.LocalDate
 import org.junit.runner.RunWith
 import org.qslib.quantscale.Implicits._
+import org.qslib.quantscale.currency.Europe.EUR
 import org.saddle.Vec
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner

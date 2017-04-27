@@ -1,12 +1,18 @@
-organization := "org.qslib"
+organization := "org.quantlib"
 
 name := "quantscale"
+description := "quantlib implementation in scala"
 
-version := "0.1.0"
+version := "0.2.0-SNAPSHOT"
 
 scalaVersion := "2.11.8"
-
 scalacOptions ++= Seq("-unchecked", "-deprecation")
+
+licenses += ("BSD", url("https://github.com/unilama/quantscale/blob/master/LICENSE.txt"))
+
+bintrayVcsUrl := Some("git@github.com:unilama/quantscale.git")
+bintrayPackageLabels := Seq("finance", "quant")
+bintrayReleaseOnPublish := false
 
 libraryDependencies ++= Seq(
   "org.scala-saddle" %% "saddle-core" % "1.3.+",

@@ -168,7 +168,7 @@ trait ExchangeRateManager {
 
   private def addKnownRates() {
     // Currencies obsoleted by Euro
-    add(ExchangeRate(EUR, Europe.ITL, 1936.27), new LocalDate(1999, 1, 1))
+    add(ExchangeRate(Europe.EUR, Europe.ITL, 1936.27), new LocalDate(1999, 1, 1))
   }
 
   private case class Entry(rate: ExchangeRate, startDate: LocalDate = MinDate, endDate: LocalDate = MaxDate) {

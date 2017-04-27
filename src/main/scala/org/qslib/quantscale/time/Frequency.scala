@@ -47,20 +47,25 @@ package org.qslib.quantscale.time
  * @author Choucri FAHED
  * @since 1.0
  */
-sealed trait Frequency {
-  def apply(): Int
-}
+class Frequency(val value: Int) extends AnyVal
 
-case object NoFrequency extends Frequency { override val apply = -1 }
-case object Once extends Frequency { override val apply = 0 }
-case object Annual extends Frequency { override val apply = 1 }
-case object Semiannual extends Frequency { override val apply = 2 }
-case object EveryFourthMonth extends Frequency { override val apply = 3 }
-case object Quarterly extends Frequency { override val apply = 4 }
-case object Bimonthly extends Frequency { override val apply = 6 }
-case object Monthly extends Frequency { override val apply = 12 }
-case object EveryFourthWeek extends Frequency { override val apply = 13 }
-case object Biweekly extends Frequency { override val apply = 26 }
-case object Weekly extends Frequency { override val apply = 52 }
-case object Daily extends Frequency { override val apply = 365 }
-case object OtherFrequency extends Frequency { override val apply = 999 }
+object Frequency {
+
+  def apply(frequency: Int): Frequency = new Frequency(frequency)
+
+  implicit def unwrapp(frequency: Frequency): Int = frequency.value
+
+  lazy val NoFrequency = Frequency(-1)
+  lazy val Once = Frequency(0)
+  lazy val Annual = Frequency(1)
+  lazy val Semiannual = Frequency(2)
+  lazy val EveryFourthMonth = Frequency(3)
+  lazy val Quarterly = Frequency(4)
+  lazy val Bimonthly = Frequency(6)
+  lazy val Monthly = Frequency(12)
+  lazy val EveryFourthWeek = Frequency(13)
+  lazy val Biweekly = Frequency(26)
+  lazy val Weekly = Frequency(52)
+  lazy val Daily = Frequency(365)
+  lazy val OtherFrequency = Frequency(999)
+}

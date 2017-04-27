@@ -41,7 +41,9 @@ package org.qslib.quantscale.termstructure.yieldp
 
 import org.qslib.quantscale._
 import org.qslib.quantscale.termstructure.YieldTermStructure
+import org.qslib.quantscale.time.Frequency.Annual
 import org.qslib.quantscale.time._
+
 import scala.util.Try
 
 /** Flat interest-rate curve. */

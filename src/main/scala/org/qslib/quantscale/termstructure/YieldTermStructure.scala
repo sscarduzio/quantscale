@@ -47,6 +47,8 @@ import org.qslib.quantscale.Implicits.dt
 import org.joda.time.LocalDate
 import org.qslib.quantscale.time._
 import com.github.nscala_time.time.Imports._
+import org.qslib.quantscale.time.Frequency.Annual
+
 import scala.util.Try
 
 /**
@@ -103,10 +105,10 @@ trait YieldTermStructure extends TermStructure {
    * @note The resulting interest rate has the required day counting rule.
    */
   final def zeroRateDate(date: LocalDate,
-    resultDayCounter: DayCounter,
-    compounding: Compounding,
-    frequency: Frequency = Annual,
-    extrapolate: Boolean = false): Try[InterestRate] = Try {
+                         resultDayCounter: DayCounter,
+                         compounding: Compounding,
+                         frequency: Frequency = Annual,
+                         extrapolate: Boolean = false): Try[InterestRate] = Try {
     if (date == referenceDate()) {
       val compound = 1.0 / discount(dt, extrapolate).get
       // t has been calculated with a possibly different day counter

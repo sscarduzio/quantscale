@@ -113,7 +113,7 @@ package object quantscale {
   val M_LOG2_E = 0.693147180559945309417
   val M_LN10 = 2.30258509299404568402
   val M_PI = 3.141592653589793238462643383280
-  val M_TWOPI = (M_PI * 2.0)
+  val M_TWOPI = M_PI * 2.0
   val M_PI_2 = 1.57079632679489661923
   val M_PI_4 = 0.785398163397448309616
   val M_3PI_4 = 2.3561944901923448370E0
@@ -132,13 +132,6 @@ package object quantscale {
 
   val MinDate = new LocalDate(0, 1, 1)
   val MaxDate = new LocalDate(9999, 12, 31)
-
-  // Most frequently used currencies
-  val CHF = org.qslib.quantscale.currency.Europe.CHF
-  val EUR = org.qslib.quantscale.currency.Europe.EUR
-  val GBP = org.qslib.quantscale.currency.Europe.GBP
-  val JPY = org.qslib.quantscale.currency.Asia.JPY
-  val USD = org.qslib.quantscale.currency.America.USD
 
   implicit object LocalDateOrdering extends Ordering[LocalDate] {
     def compare(x: LocalDate, y: LocalDate) = x compareTo y

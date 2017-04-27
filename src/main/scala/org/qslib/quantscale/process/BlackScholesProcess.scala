@@ -45,10 +45,12 @@ import org.qslib.quantscale.Implicits._
 import org.qslib.quantscale.termstructure.YieldTermStructure
 import org.qslib.quantscale.termstructure.volatility.equityfx._
 import org.qslib.quantscale.time._
+
 import scala.util.Try
 import org.joda.time.LocalDate
 import org.qslib.quantscale.pattern.ObservableDefImpl
 import org.qslib.quantscale.termstructure.yieldp.FlatForward
+import org.qslib.quantscale.time.Frequency.NoFrequency
 import org.qslib.quantscale.time.calendar.NullCalendar
 
 /**

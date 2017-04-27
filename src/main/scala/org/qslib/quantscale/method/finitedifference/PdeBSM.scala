@@ -40,7 +40,7 @@ package org.qslib.quantscale.method.finitedifference
 
 import org.qslib.quantscale.process.GeneralizedBlackScholesProcess
 import org.qslib.quantscale._
-import org.qslib.quantscale.time.NoFrequency
+import org.qslib.quantscale.time.Frequency.NoFrequency
 
 case class PdeBSM(process: GeneralizedBlackScholesProcess) extends PdeSecondOrderParabolic {
   override def diffusion(t: Time, x: Real) = process.diffusion(t, x)

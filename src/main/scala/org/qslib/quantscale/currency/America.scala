@@ -58,34 +58,34 @@ object America {
    * The ISO three-letter code is ARS; the numeric code is 32.
    * It is divided in 100 centavos.
    */
-  val ARS = Currency("Argentinian peso", "ARS", 32, "", "", 100, Rounding(), "%2% %1$.2f")
+  lazy val ARS = Currency("Argentinian peso", "ARS", 32, "", "", 100, Rounding(), "%2% %1$.2f")
 
   /**
    * ==Brazilian Real==
    * The ISO three-letter code is BRL; the numeric code is 986.
    * It is divided in 100 centavos.
    */
-  val BRL = Currency("Brazilian real", "BRL", 986, "R$", "", 100, Rounding(), "%3% %1$.2f")
+  lazy val BRL = Currency("Brazilian real", "BRL", 986, "R$", "", 100, Rounding(), "%3% %1$.2f")
 
   /**
    * ==Canadian Dollar==
    * The ISO three-letter code is CAD; the numeric code is 124.
    * It is divided into 100 cents.
    */
-  val CAD = Currency("Canadian dollar", "CAD", 124, "Can$", "", 100, Rounding(), "%3% %1$.2f")
+  lazy val CAD = Currency("Canadian dollar", "CAD", 124, "Can$", "", 100, Rounding(), "%3% %1$.2f")
 
   /**
    * ==Mexican Peso==
    * The ISO three-letter code is MXN; the numeric code is 484.
    * It is divided in 100 centavos.
    */
-  val MXN = Currency("Mexican peso", "MXN", 484, "Mex$", "", 100, Rounding(), "%3% %1$.2f")
+  lazy val MXN = Currency("Mexican peso", "MXN", 484, "Mex$", "", 100, Rounding(), "%3% %1$.2f")
 
   /**
    * ==U.S. Dollar==
    * The ISO three-letter code is USD; the numeric code is 840.
    * It is divided in 100 cents.
    */
-  val USD = Currency("U.S. dollar", "USD", 840, "$", "\u00a2", 100, Rounding(), "%3% %1$.2f")
+  lazy val USD = Currency("U.S. dollar", "USD", 840, "$", "\u00a2", 100, Rounding(), "%3% %1$.2f")
 
 }

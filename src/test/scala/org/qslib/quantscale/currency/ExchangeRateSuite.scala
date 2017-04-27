@@ -44,6 +44,9 @@ import org.scalatest.junit.JUnitRunner
 import org.qslib.quantscale._
 import com.github.nscala_time.time.Imports._
 import org.qslib.quantscale.Implicits._
+import org.qslib.quantscale.currency.Europe._
+import org.qslib.quantscale.currency.America._
+import org.qslib.quantscale.currency.Asia._
 
 @RunWith(classOf[JUnitRunner])
 class ExchangeRateSuite extends FunSuite {
